@@ -1,19 +1,15 @@
-import express from "express";
-import cors from "cors";
+const express = require("express");
+const cors = require("cors");
+
+const studentRoutes = require("./routes/studentRoutes");
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
-// Test route
-app.get("/", (req, res) => {
-  res.send("Backend is running 🚀");
-});
+app.use("/students", studentRoutes);
 
-// Student API example
-app.get("/api/student", (req, res) => {
-  res.json({ name: "John Doe", rollNo: "123", reports: [] });
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
 });
-
-const PORT = 4000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
